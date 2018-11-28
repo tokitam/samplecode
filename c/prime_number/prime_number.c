@@ -1,22 +1,23 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void usage()
 {
     printf("usage: prime_number [number]\n\n");
 }
 
-int check_prime_number(int number)
+long long check_prime_number(long number)
 {
-    int i, max = number / 2;
+    long i, max = number / 2;
 
     for (i=2; i <= max; i++) {
         if (number % i == 0) {
-            // no prime number		   
+            // no prime number
             return 0;
         }
-	   
+
     }
 
     // prime number
@@ -25,25 +26,28 @@ int check_prime_number(int number)
 
 int main(int argc, char *argv[])
 {
-    int i, min, max;
+    long long i, min, max;
+    clock_t start = clock();
 
     if (argc < 2) {
         usage();
         return 0;
     } else if (argc == 2) {
         min = 2;
-        max = atoi(argv[1]);
+        max = atoll(argv[1]);
     } else {
-        min = atoi(argv[1]);
-        max = atoi(argv[2]);
+        min = atoll(argv[1]);
+        max = atoll(argv[2]);
     }
-
 
     for (i=min; i <= max; i++) {
         if (check_prime_number(i)) {
-            printf("%d\n", i);
+            printf("%lld\n", i);
         }
     }
 
+    printf("clock:%fs\n", (double)(clock() - start) / 1000000);
+
     return 0;
 }
+
