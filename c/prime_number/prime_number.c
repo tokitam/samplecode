@@ -27,7 +27,6 @@ long long check_prime_number(long number)
 int main(int argc, char *argv[])
 {
     long long i, min, max;
-    clock_t start = clock();
 
     if (argc < 2) {
         usage();
@@ -40,13 +39,13 @@ int main(int argc, char *argv[])
         max = atoll(argv[2]);
     }
 
+    min = (min < 2) ? 2 : min;
+
     for (i=min; i <= max; i++) {
         if (check_prime_number(i)) {
             printf("%lld\n", i);
         }
     }
-
-    printf("clock:%fs\n", (double)(clock() - start) / 1000000);
 
     return 0;
 }
